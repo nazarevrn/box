@@ -1,0 +1,27 @@
+CREATE TABLE `patients` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+
+CREATE TABLE `patients_data` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `patient_id` int(10) unsigned NOT NULL,
+  `pulse` tinyint(3) unsigned DEFAULT NULL,
+  `s_pressure` tinyint(3) unsigned DEFAULT NULL COMMENT 'Систолическое давление - первая цифра',
+  `d_pressure` tinyint(3) unsigned DEFAULT NULL COMMENT 'Дистолическое давление - вторая цифра',
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  CONSTRAINT patient_data_fk 
+  FOREIGN KEY (patient_id)  REFERENCES patients (id) 
+  ON DELETE RESTRICT
+  
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+
+CREATE INDEX created_at ON patients_data(created_at)
+
+CREATE INDEX pulse_pressure ON patients_data(pulse, s_pressure, d_pressure);
+
+patients_data

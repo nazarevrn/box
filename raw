@@ -1,0 +1,5 @@
+CONSTRAINT patient_data_fk 
+FOREIGN KEY (patient_id)  REFERENCES patients (id) 
+ON DELETE RESTRICT
+
+
