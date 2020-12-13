@@ -34,14 +34,17 @@ if ($first && $second) {
         $countDays = $begin->diff($end)->days;
         $i = 1;
         while ($i <= $countDays) {
+            $step = 1;
             if ((int)$begin->format('N') === $searchedDayNum) {
                 $result++;
+                //переходим к следующей неделе
                 $begin = $begin->modify('+7 days');
-                $i += 7;
+                $step = 7;
             } else {
                 $begin = $begin->modify('+1 day');
-                $i++;
             }
+
+            $i += $step;
         }
     }
 }
